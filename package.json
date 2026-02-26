@@ -1,0 +1,25 @@
+{
+  "name": "am-ai-mirror-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "stop:demo": "sh -c 'lsof -ti:8080 | xargs -r kill -9 || true'",
+    "dev:clean": "npm run stop:demo && npm run dev",
+    "demo": "npm install && npm run stop:demo && npm run dev",
+    "test:smoke": "node scripts/smoke-test.mjs",
+    "test:judge": "node scripts/judge-models.mjs"
+  },
+  "dependencies": {
+    "@cartesia/cartesia-js": "^2.2.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.104.0",
+    "uuid": "^11.1.0",
+    "zod": "^3.25.76"
+  }
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Mirror MVP</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>AI Twin — Voice Chat</h1>
+      <p class="subtitle">Audio-first conversation with live memory and state tracking.</p>
+
+      <section class="panel small" id="statusPanel">Starting session...</section>
+
+      <div class="layout">
+        <aside class="column sidebar">
+          <section class="panel" id="statePanel">
+            <strong>Mental State</strong>
+            <div id="mindStateCard" class="small" style="margin-top:10px;">Waiting for signals...</div>
+            <div class="meter" style="margin-top: 12px;">
+              <div id="moodMeterFill" class="meter-fill"></div>
+            </div>
+            <div class="row" style="margin-top: 8px; justify-content: space-between;">
+              <span id="moodLabel" class="small">Neutral</span>
+              <span id="stateConfidence" class="small">0%</span>
+            </div>
+          </section>
+
+          <section class="panel" id="insightsPanel">
+            <strong>Memory</strong>
+            <div id="insights" class="small" style="margin-top: 10px;">No insights yet.</div>
+          </section>
+        </aside>
+
+        <section class="column main-col">
+          <section class="panel" id="audioPanel">
+            <div class="row">
+              <button id="recordBtn" class="primary">🎙 Start Voice</button>
+              <button id="speakBtn" class="secondary">🔊 Voice On</button>
+              <select id="modeSelect">
+                <option value="twin">Twin Mode</option>
+                <option value="coach">Coach Mode</option>
+              </select>
+              <label class="small" for="apiVoiceSelect">Voice:</label>
+              <select id="apiVoiceSelect"></select>
+              <button id="sendBtn" class="secondary">Send</button>
+            </div>
+
+            <div class="panel ghost" style="margin-top: 12px;">
+              <div class="small"><strong>Live transcript</strong></div>
+              <div id="liveTranscript" class="small" style="margin-top:6px; min-height: 20px;">Listening...</div>
+            </div>
+
+            <textarea id="inputBox" class="visually-hidden" placeholder="Hidden voice transcript buffer"></textarea>
+          </section>
+
+          <section class="panel chat" id="chat"></section>
+
+          <section class="panel paywall" id="paywallPanel" hidden>
+            <strong>Free trial reached</strong>
+            <p class="small">You used your free conversation minutes. Unlock unlimited mirror sessions for €5/month.</p>
+            <button class="primary" id="unlockBtn">Unlock Pro (Demo CTA)</button>
+          </section>
+        </section>
+      </div>
+
+      <details class="panel" id="advancedPanel">
+        <summary><strong>Advanced Controls</strong></summary>
+
+        <section class="panel" id="voiceLabPanel">
+          <strong>Voice Lab</strong>
+          <div class="small" style="margin-top: 10px;">Automatic mode enabled: the app calibrates voice style from your first audio samples when consent is granted.</div>
+          <div class="row" style="margin-top: 10px;">
+            <button class="secondary" id="recordSampleBtn">⏺ Start Sample Recording</button>
+            <button class="secondary" id="useRecordingBtn" disabled>Use Last Recording</button>
+            <input id="voiceCloneFile" type="file" accept="audio/*" />
+            <button class="secondary" id="uploadVoiceCloneBtn">Upload Voice Sample</button>
+            <button class="secondary" id="testClonedVoiceBtn">Test Cloned Voice</button>
+          </div>
+          <div id="voiceInfo" class="small" style="margin-top: 10px;">Waiting for first audio sample...</div>
+          <div id="voiceCalibrationInfo" class="small" style="margin-top: 10px;">Calibration not started.</div>
+          <div id="recordingInfo" class="small" style="margin-top: 10px;">No in-app recording yet.</div>
+          <div id="voiceCloneInfo" class="small" style="margin-top: 10px;">No cloned voice profile yet.</div>
+        </section>
+
+        <section class="panel" id="consentPanel">
+          <strong>Consent</strong>
+          <div class="row" style="margin-top: 10px;">
+            <label class="small"><input id="consentVoiceAdapt" type="checkbox" /> Adaptive voice tuning during this session</label>
+          </div>
+          <div class="row" style="margin-top: 10px;">
+            <label class="small"><input id="consentTwinTraining" type="checkbox" /> Identity mirror adaptation during this session</label>
+          </div>
+          <div class="row" style="margin-top: 10px;">
+            <label class="small"><input id="consentVoiceClone" type="checkbox" /> Voice cloning from uploaded samples in this session</label>
+          </div>
+          <div class="row" style="margin-top: 10px;">
+            <button class="secondary" id="saveConsentBtn">Save Consent</button>
+          </div>
+          <div id="consentInfo" class="small" style="margin-top: 10px;">Consent not set yet.</div>
+        </section>
+
+        <section class="panel" id="privacyPanel">
+          <strong>Privacy</strong>
+          <div id="privacyInfo" class="small" style="margin-top: 10px;">Loading privacy settings...</div>
+          <div class="row" style="margin-top: 10px;">
+            <button class="secondary" id="deleteSessionBtn">Delete My Session Now</button>
+          </div>
+        </section>
+
+        <section class="panel" id="aiConfigPanel">
+          <strong>AI Engine</strong>
+          <div class="row" style="margin-top: 10px;">
+            <button class="secondary" id="testAiBtn">Test AI Engine</button>
+          </div>
+          <div id="aiConfigInfo" class="small" style="margin-top: 10px;">Loading AI config...</div>
+          <div id="aiProbeInfo" class="small" style="margin-top: 10px;">No probe result yet.</div>
+        </section>
+      </details>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
